@@ -7,7 +7,7 @@ We made a simple agent based model to test the decentralization and security of 
 In Proof of Stake
 
 ### miners
-{\subset}
+$\subset$
 
 ## Consensus Algorithms and analytics 
 
