@@ -1,10 +1,11 @@
 '''
-Random Selection (OG) PoS
+Priority Selection (OG) PoS
 Mechanism 1 is random selection PoS.
 
-A random portion of network (0-100%) can choose to delegate.
+A random portion of network (0-100%) can choose to stake.
 Their chance to be selected pertain to the amount they stake (assume they stake everything).
 '''
+import random as rd
 def mech1(network, directory):  
 
 # 

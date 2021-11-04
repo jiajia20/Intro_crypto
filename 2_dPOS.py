@@ -12,4 +12,7 @@ While in practice the ratio of spliting block rewards are decide dynamically by 
 the rewards are splot 50-50
 
 the Graph visualize the deletation relationships.
+
+
+https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md#consensus-algorithm-bft-dpos
 '''

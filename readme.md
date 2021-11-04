@@ -4,12 +4,15 @@ We made a simple agent based model to test the decentralization and security of 
 
 
 ## About POS
-In Proof of Stake
+In Proof of Stake is a variation of consensus algorithms of distributed systems. 
+The goal is to 1)maintain a shared record with the presence of malicious participants 2)
 
 ### miners
-$\subset$
+selected miner for an transaction $\subset$ all miners $\subset$ participants
 
-## Consensus Algorithms and analytics 
+## rewards 
+
+## Modeling decentralization and decurity of POS Consensus Algorithms
 
 - the numbered file are implementation of different POS mechanism
 - the models are 
@@ -21,3 +24,6 @@ Our framework runs as follows:
 - each 
 
 
+## Limitation
+- sophisticated attacks such as grinding attacks are not discussed in the security analysis. It's possible that new design can be gamed with well-targetted attacks
+- We only discussed wealth centralization, more specifically, the nartually emerging pattern of rich get richer and eventually take over the network.
