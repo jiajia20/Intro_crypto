@@ -11,4 +11,8 @@ https://vitalik.ca/general/2021/07/29/gini.html
 
 k (final miner list) < c (candidate miner) < n (total miner)
 beta = k/n, measure how beta changed
+
+- want large number of people that can be choosen large k/n
+- among people participate, who are likely to win
+- % of wealth (NEED MORE DISCUSSION)
 '''
