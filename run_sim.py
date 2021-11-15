@@ -20,7 +20,6 @@ def run_sim(iters=10):
     net.nodes.sort(key=take_wealth)
     for j in range(100):
         print(net.nodes[j].wealth)
-    return centralization_overtime
 
 if __name__=="__main__":
     run_sim()
