@@ -4,9 +4,14 @@ import numpy as np
 import collections
 
 class protocol_interface:
-    def validate_block(network, num_validators):
+    def validate_block(self, num_validators):
         """Choose a number of validators from the network and reward them"""
         pass
+
+    def reward_winners(self, winners):
+        for w in winners:
+            reward = 20 + rd.randint(6,12)
+            w.update(reward)
 
 
 class pPOS(protocol_interface):
@@ -20,9 +25,7 @@ class pPOS(protocol_interface):
         # winner selected psudo-randomly with weight proportional to wealth
         probability_distribution = [w/total for w in wealth_values]
         winners = list(np.random.choice(self.network.nodes, num_validators, p=probability_distribution, replace=False))
-        for w in winners:
-            reward = 20 + rd.randint(6,12)
-            w.update(reward)
+        self.reward_winners(winners)
 
 class dPOS(protocol_interface):
     def __init__(self, network):
@@ -38,6 +41,4 @@ class dPOS(protocol_interface):
         election = np.random.choice(self.network.nodes, self.network.num_nodes, p=probability_distribution, replace=True)
         top_votes = collections.Counter(election).most_common(num_validators)
         winners = [n[0] for n in top_votes]
-        for w in winners:
-            reward = 20 + rd.randint(6,12)
-            w.update(reward)
+        self.reward_winners(winners)
