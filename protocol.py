@@ -35,8 +35,8 @@ class dPOS(protocol_interface):
         # each node votes for another node to be a validator
         # nodes vote psudo-randomly with weight proportional to number of blocks validated
         probability_distribution = [w/total for w in block_values]
-        election = list(np.random.choice(self.network.nodes, self.network.num_nodes, p=probability_distribution, replace=True))
-        top_votes = collections.Counter(election).most_common()[:num_validators]
+        election = np.random.choice(self.network.nodes, self.network.num_nodes, p=probability_distribution, replace=True)
+        top_votes = collections.Counter(election).most_common(num_validators)
         winners = [n[0] for n in top_votes]
         for w in winners:
             reward = 20 + rd.randint(6,12)
