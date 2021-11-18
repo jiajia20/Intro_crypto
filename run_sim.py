@@ -17,7 +17,7 @@ def run_sim(iters=1001):
             print(k, "= ", centralization_val)
             centralization_overtime.append((k,centralization_val))
 
-    with open('dPOS_results.csv','w') as out:
+    with open('lottery_results.csv','w') as out:
         csv_out=csv.writer(out)
         csv_out.writerow(['iteration','gini coefficient'])
         for row in centralization_overtime:

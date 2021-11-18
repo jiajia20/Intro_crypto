@@ -9,6 +9,7 @@ class node:
         self.stake = 0
         self.risk = rd.random()
         self.blocks = 1
+        self.stakers = {}
 
     def update(self, reward):
         self.wealth += reward
@@ -21,12 +22,20 @@ class node:
 
     def participate(self, cost):
         self.stake = 0
+        adjustment = 1
         while self.wealth > cost:
-            if rd.random() > self.risk:
+            if rd.random() > (self.risk / adjustment):
                 break
             self.wealth -= cost
             self.stake += 1
+            adjustment += 1
         return self.stake * cost
+
+    def vote(self, node):
+        node.stakers[self] = self.risk * self.wealth
+
+    def sum_stakers(self):
+        return sum(self.stakers.values())
 
 class network:
 

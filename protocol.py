@@ -39,9 +39,26 @@ class dPOS(protocol_interface):
         # nodes vote psudo-randomly with weight proportional to number of blocks validated
         probability_distribution = [b/total for b in block_values]
         election = np.random.choice(self.network.nodes, self.network.num_nodes, p=probability_distribution, replace=True)
-        top_votes = collections.Counter(election).most_common(num_validators)
-        winners = [n[0] for n in top_votes]
-        self.reward_winners(winners)
+
+        for i in range(len(self.network.nodes)):
+            self.network.nodes[i].vote(election[i])
+
+        stake_values = [n.sum_stakers() for n in self.network.nodes]
+        total_stake = sum(stake_values)
+        stake_probability = [s/total_stake for s in stake_values]
+        winner = np.random.choice(self.network.nodes, 1, p=stake_probability, replace=False)
+        w = winner[0]
+
+        reward = 20 + rd.randint(6,12)
+        winner_distribution = 0.2 * reward
+        staker_distribution = 0.8 * reward
+        w.update(winner_distribution)
+
+        w_total = w.sum_stakers()
+        for s, v in w.stakers.items():
+            dist = v/w_total
+            s.pity(staker_distribution * dist)
+
 
 class lottery(protocol_interface):
     def __init__(self, network):
@@ -58,7 +75,7 @@ class lottery(protocol_interface):
         probability_distribution = [l/total for l in lottery_values]
         winners = list(np.random.choice(participants, num_validators, p=probability_distribution, replace=False))
 
-        ratio = 5 * num_validators / self.network.num_nodes
+        ratio = 10 * num_validators / self.network.num_nodes
         winner_distribution = ratio * self.network.prize_pool
         winner_split = winner_distribution / num_validators
         for w in winners:
