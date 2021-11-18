@@ -58,6 +58,9 @@ class dPOS(protocol_interface):
         for s, v in w.stakers.items():
             dist = v/w_total
             s.pity(staker_distribution * dist)
+        
+        for n in self.network.nodes:
+            n.stakers = {}
 
 
 class lottery(protocol_interface):
