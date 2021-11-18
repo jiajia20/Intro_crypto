@@ -7,7 +7,7 @@ import csv
 
 def run_sim(iters=1001):
     net = network(10000)
-    protocol = dPOS(net)
+    protocol = lottery(net)
 
     centralization_overtime = []
     for k in range(iters):

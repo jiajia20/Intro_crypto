@@ -6,11 +6,27 @@ class node:
     def __init__(self, id, wealth):
         self.id = id
         self.wealth = wealth
+        self.stake = 0
+        self.risk = rd.random()
         self.blocks = 1
 
     def update(self, reward):
         self.wealth += reward
         self.blocks += 1
+        self.risk *= 1.02
+
+    def pity(self, amount):
+        self.wealth += amount
+        self.risk *= 0.98
+
+    def participate(self, cost):
+        self.stake = 0
+        while self.wealth > cost:
+            if rd.random() > self.risk:
+                break
+            self.wealth -= cost
+            self.stake += 1
+        return self.stake * cost
 
 class network:
 
@@ -18,6 +34,7 @@ class network:
         self.nodes = []
         self.num_nodes = num_nodes
         self.normal_distribution()
+        self.prize_pool = 0
 
     def number_of_nodes(self):
         return self.num_nodes
@@ -45,3 +62,14 @@ class network:
         for i in range(self.num_nodes):
             wealth = np.random.normal(loc=100, scale = 10)
             self.nodes.append(node(i, wealth))
+
+    def participants(self, cost):
+        self.prize_pool = 0
+        participants = []
+        for n in self.nodes:
+            self.prize_pool += n.participate(cost)
+            if (n.stake > 0):
+                participants.append(n)
+        return participants
+
+
