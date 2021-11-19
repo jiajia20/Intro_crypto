@@ -54,12 +54,14 @@ class dPOS(protocol_interface):
         winner = np.random.choice(self.network.nodes, 1, p=probability_distribution, replace=False)
         w = winner[0]
 
+        # validator distributes block reward in accordance to their greed
         reward = 20 + rd.randint(6,12)
         winner_distribution = w.greed * reward
         staker_distribution = (1 - w.greed) * reward
         w.add_wealth(winner_distribution)
         w.add_blocks(1)
 
+        # distribute wealth to stakers and each staker evaluates their opinion on the validator
         w_total = w.sum_stakers()
         for s, v in w.stakers.items():
             dist = v/w_total
@@ -67,6 +69,7 @@ class dPOS(protocol_interface):
             s.add_wealth(reward)
             s.opinion(w, reward)
         
+        # clear the stakers and self reflect
         for n in self.network.nodes:
             n.stakers = {}
             n.reflect()
@@ -78,25 +81,29 @@ class lottery(protocol_interface):
         self.cost = 1
     
     def validate_block(self, num_validators):
+        # each node decides whether or not to purchase "lottery tickets"
         participants = self.network.participants(self.cost)
         lottery_values = [n.stake for n in participants]
         total = sum(lottery_values)
 
-        ## each node decides whether or not to purchase "lottery tickets"
-        ## network chooses winners without duplicate
+        # network chooses winners without duplicate
         probability_distribution = [l/total for l in lottery_values]
         winners = list(np.random.choice(participants, num_validators, p=probability_distribution, replace=False))
 
+        # set reward distribution ratio
         ratio = 10 * num_validators / self.network.num_nodes
+
+        # distribute rewards, winners will get greedier
         winner_distribution = ratio * self.network.prize_pool
         winner_split = winner_distribution / num_validators
         for w in winners:
             w.add_wealth(winner_split)
             w.adjust_greed(1.05)
 
+        # distribute consolation reward, losers get less greedy
         remainder = list(set(participants) - set(winners))
         remainder_distribution = (1.0 - ratio) * self.network.prize_pool
         remainder_split = remainder_distribution / len(remainder)
         for r in remainder:
             r.add_wealth(remainder_split)
-            r.adjust_greed(0.95)
+            r.adjust_greed(0.99)
