@@ -7,20 +7,27 @@ class player(object):
         self.id = id
         self.wealth = wealth
 
-    def update(self, reward):
-        self.wealth += reward
+    def update(self, block_reward, transaction_reward):
+        self.wealth += block_reward + transaction_reward
 
 class network:
 
-    def __init__(self, num_nodes, distribution):
+    def __init__(self, num_nodes):
         self.nodes = []
         self.num_nodes = num_nodes
+        self.block_reward = 5
         for i in range(num_nodes):
-            wealth = np.random.normal(loc=100, scale=10)
+            wealth = np.random.normal(loc=10, scale=5)
             self.nodes.append(player(i, wealth))
 
     def number_of_nodes(self):
         return self.num_nodes
 
     def calc_centralization(self):
-        return 0
+        x = np.array([n.wealth for n in self.nodes])
+
+        """Compute Gini coefficient of array of values"""
+        diffsum = 0
+        for i, xi in enumerate(x[:-1], 1):
+            diffsum += np.sum(np.abs(xi - x[i:]))
+        return diffsum / (len(x)**2 * np.mean(x))
