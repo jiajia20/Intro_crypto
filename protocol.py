@@ -107,3 +107,5 @@ class lottery(protocol_interface):
         for r in remainder:
             r.add_wealth(remainder_split)
             r.adjust_greed(0.99)
+            if r.greed < 0.5:
+                r.adjust_greed(1.5)
