@@ -105,7 +105,7 @@ class network:
             self.nodes.append(node(i, wealth))
 
     def participants(self, cost):
-        self.prize_pool = 0
+        self.prize_pool = 20
         participants = []
         for n in self.nodes:
             self.prize_pool += n.participate(cost)
