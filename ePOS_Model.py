@@ -7,8 +7,8 @@ class player(object):
         self.wealth = wealth
         self.blocks_mined = 0
 
-    def update(self, block_reward, transaction_reward):
-        self.wealth += block_reward + transaction_reward
+    def update(self, block_reward):
+        self.wealth += block_reward
         self.blocks_mined += 1
 
 class network(object):
