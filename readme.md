@@ -7,27 +7,15 @@ We made a simple agent based model to test the decentralization and security of 
 In Proof of Stake is a variation of consensus algorithms of distributed systems. 
 The goal is to 
 1) maintain a shared record with the presence of malicious participants - BFT
-2) maintain transaction record without the need of a global clock.
+2) maintain transaction record , keep it updating without the need of a global clock.
 3) use incentive systems i.e. reward service providers with tokens of montary values, to create a ledger that countonues maintain a shared record despite certain percentage of malicious/adversarial participants. 
-
-### miners
-selected miner for an transaction $\subset$ all miners $\subset$ participants
-Among those participants, a percentage are honest, others are rationally selfish.
-Miners are selected through a variation of staking process to mine the next block. The staking process freeze the stake and the reward process allocate rewards back to the miners (and/or their supporters). participants accumulate wealth through this process.
-
-### rewards 
-Rewads are distributed through two mainsource: transaction fees and block reward - both are given to the miners (and/or their supporters).
-selection of how much stake is needed to participate, who gets the reward, and how much reward is given to who creates the change of the distribution of wealth. 
-
-### mining, transaction and attacks
-Mining happens as follows: 
 
 ## Scope & Limiation
 In this paper:
 ### Consensus
 We assume the participaion are permissionless. Since clearly a permissioned blockchain can be replaced with a distributed network run by a centralized service provider and it makes no sense to take about decentralization at that point. 
 
-We assume that some of the participants are honest and others are rationally selfish (responde to ecnomic incentive). The vulunerability of the systems resides on certain percentage of the particpants being honest (more specifically, percentage of the stake hold by honest participants). We argue that while majority attack (holding 51% of decision power)can happen, when it actually happens, the rest of the network can fork the system so that the majority attacker holds no tokens [source](https://cointelegraph.com/news/hive-hard-fork-is-successful-steem-crashes-back-to-earth).
+We also assume that some of the participants are honest and others are rationally selfish (responde to ecnomic incentive). The vulunerability of the systems resides on certain percentage of the particpants being honest (more specifically, percentage of the stake hold by honest participants). We argue that while majority attack (holding 51% of decision power)can happen, when it actually happens, the rest of the network can fork the system so that the majority attacker holds no tokens [source](https://cointelegraph.com/news/hive-hard-fork-is-successful-steem-crashes-back-to-earth).
 
 We focus soly on the economic layer (i.e. how stakes change over time according to the stake collection and reward mechanism) while leave the excat implementation of the consensus forming mechanism out of the scope of discussion.
 
@@ -39,7 +27,38 @@ While network resilience also lies in the geographical discentrlization of serve
 
 We focus on what design of staking participation and reward will increase wealth decentralization (reduce the likelyhood of rich get richer) without causing damage to the security to our best knowledge. 
 
+## Models
+### miners/service providers
+selected miner for a transaction $\subset$ all miners $\subset$ all account holders
+Among those participants, a percentage are honest, others are rationally selfish.
+Miners are selected through a variation of staking process to mine the next block. The staking process freeze the stake and the reward process allocate rewards back to the miners (and/or their supporters). participants accumulate wealth through this process.
 
+### rewards 
+Rewads are distributed through two mainsource: transaction fees and block reward - both are given to the miners (and/or their supporters).
+selection of how much stake is needed to participate, who gets the reward, and how much reward is given to who creates the change of the distribution of wealth. 
+
+### mining, transaction and attacks
+Mining happens as follows:
+Many transactions make a block,
+Many blocks make an epoch
+Epochs make up the chain.
+
+Miner are rewarded with the transaction fee and potentially block reward associated with a block. Each variation of POS produce different implimentation of mining, transaction and also vlunerable for different attacks. 
+
+
+## Evaluatoin
+We focus our evaluation on decentralization of wealth as a result of the mining reward layer. We also inviestigate the impact of POS design on security.
+
+### Decentralization
+Decentralization are measured in four matric. 
+- 
+- 
+
+### Security 
+We test limitation:
+
+## Goal
+- 
 
 
 ## Modeling decentralization and decurity of POS Consensus Algorithms
@@ -57,3 +76,15 @@ Our framework runs as follows:
 ## Limitation
 - sophisticated attacks such as grinding attacks are not discussed in the security analysis. It's possible that new design can be gamed with well-targetted attacks
 - We only discussed wealth centralization, more specifically, the nartually emerging pattern of rich get richer and eventually take over the network.
+
+
+
+## Notes
+### Terms to define
+- miners
+- economic layer/incentive layer
+- attacks we evaluate 
+
+
+## Work/ ToDO
+- how staking happens step by step
