@@ -9,7 +9,7 @@ from ePOS import *
 
 def run_sim(iters=1000):
     #make a storage list 
-    net = network(1000)
+    net = network(10000)
 
     centralization_overtime = []
 
