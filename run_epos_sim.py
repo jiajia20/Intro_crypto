@@ -7,7 +7,7 @@ run simulator
 from ePOS_Model import *
 from ePOS import *
 
-def run_sim(iters=1000):
+def run_sim(iters=10000):
     #make a storage list 
     net = network(10000)
 
@@ -16,7 +16,7 @@ def run_sim(iters=1000):
     for k in range(iters):
         blocks = net.create_blocks()
         ePOS(net, blocks)
-        if k % 10 == 0:
+        if k % 100 == 0:
             centralization_val = net.calc_centralization()
             centralization_overtime.append((k,centralization_val))
 

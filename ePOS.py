@@ -51,7 +51,7 @@ def ePOS(network, blocks):
             # if none from previous blocks, pick random node
             if len(prev) == 0:
                 min_miner = network.find_rand_node()
-                min_miner.update(network.block_reward, np.random.randint(6,12))
+                min_miner.update(network.block_reward)
                 continue
         
         # sort list of potential miners based on least blocks mined and then highest wealth
@@ -59,7 +59,7 @@ def ePOS(network, blocks):
 
         # find miner and give reward (assuming honest validation)
         min_miner = potential_miners[0]
-        min_miner.update(network.block_reward, np.random.randint(6,12))
+        min_miner.update(network.block_reward)
         
         # remove selected miner from potential list for future blocks
         if len(block_map[block]) != 0:
