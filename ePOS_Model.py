@@ -36,7 +36,7 @@ class network(object):
     
     def create_blocks(self):
         blocks = []
-        num_blocks = np.random.randint(1, 10)
+        num_blocks = 5
         for i in range(num_blocks):
             blocks.append(block(self))
         blocks.sort(key=lambda b: b.tf, reverse=True)
