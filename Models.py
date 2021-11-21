@@ -7,33 +7,65 @@ class node:
         self.id = id
         self.wealth = wealth
         self.stake = 0
-        self.risk = rd.random()
-        self.blocks = 1
+        self.blocks = rd.random()*100
         self.stakers = {}
+        # game theory variables
+        self.greed = rd.random()
+        self.popularity = rd.random()
 
-    def update(self, reward):
+    def add_wealth(self, reward):
         self.wealth += reward
-        self.blocks += 1
-        self.risk *= 1.02
 
-    def pity(self, amount):
-        self.wealth += amount
-        self.risk *= 0.98
+    def add_blocks(self, num_blocks):
+        self.blocks += num_blocks
 
+    def adjust_greed(self, adjustment):
+        if self.greed * adjustment < 1:
+            self.greed *= adjustment
+    
+    def adjust_popularity(self, adjustment):
+        if self.popularity * adjustment < 1:
+            self.popularity *= adjustment
+
+    # node reputation is number of blocks mined times popularity
+    def reputation(self):
+        return self.blocks * self.popularity
+
+    # determine how much wealth to use in order to participate based off self greed
     def participate(self, cost):
         self.stake = 0
         adjustment = 1
         while self.wealth > cost:
-            if rd.random() > (self.risk / adjustment):
+            if rd.random() > (self.greed / adjustment):
                 break
             self.wealth -= cost
             self.stake += 1
             adjustment += 1
         return self.stake * cost
 
+    # delegate stake to another node with amount based on self greed
     def vote(self, node):
-        node.stakers[self] = self.risk * self.wealth
+        node.stakers[self] = self.greed * self.wealth
 
+    # adjusts another node's popularity based on gained reward and self greed
+    # TODO: investigate whether we can use a mixed strategy nash equilibrium game to determine delegate and staker behavior
+    def opinion(self, node, reward):
+        if (reward / self.wealth) < self.greed:
+            node.adjust_popularity(0.995)
+        else:
+            node.adjust_popularity(1.0001)
+        
+    # reflect on ones self
+    # TODO: investigate sharp ratio to calculate risk/greed adjustments
+    def reflect(self):
+        # lower self greed if popularity gets too low
+        if (self.popularity < (1 - self.greed)):
+            self.adjust_greed(.80)
+        # increase greed when popularity is high enough
+        else:
+            self.adjust_greed(1.05)
+
+    # sum of wealth staked on self
     def sum_stakers(self):
         return sum(self.stakers.values())
 
