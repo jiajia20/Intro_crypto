@@ -54,7 +54,7 @@ class block(object):
 
     def __init__(self, network):
         min_wealth, max_wealth = network.find_min_max_wealth()
-        self.tf = np.random.random() * max_wealth/2
+        self.tf = min_wealth/2 + np.random.random() * (max_wealth/2)
 
 
     

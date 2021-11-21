@@ -24,7 +24,6 @@ def pPOS(network, num_validators):
         winner = players[0]
 
         # assume honest validating
-        
         # simulate giving reward (need to discuss)
         transaction_reward = rd.randint(1,4)
         winner.update(network.block_reward, transaction_reward)

@@ -6,7 +6,7 @@ run simulator
 from ePOS_Model import *
 from ePOS import *
 
-def run_sim(iters=30000):
+def run_sim(iters=1000):
     #make a storage list 
     net = network(1000)
 
