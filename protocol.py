@@ -32,7 +32,7 @@ class pPOS(protocol_interface):
         probability_distribution = self.wealth_distribution()
         winners = list(np.random.choice(self.network.nodes, num_validators, p=probability_distribution, replace=False))
         for w in winners:
-            reward = 20 + rd.randint(6,12)
+            reward = 20/num_validators
             w.add_wealth(reward)
 
 class dPOS(protocol_interface):
@@ -55,7 +55,7 @@ class dPOS(protocol_interface):
         w = winner[0]
 
         # validator distributes block reward in accordance to their greed
-        reward = 20 + rd.randint(6,12)
+        reward = 20
         winner_distribution = w.greed * reward
         staker_distribution = (1 - w.greed) * reward
         w.add_wealth(winner_distribution)
