@@ -7,7 +7,7 @@ import csv
 
 def run_sim(iters=10001):
     net = network(10000)
-    protocol = dPOS(net)
+    protocol = lottery(net)
 
     centralization_overtime = []
     for k in range(iters):
@@ -17,7 +17,7 @@ def run_sim(iters=10001):
             print(k, "= ", centralization_val)
             centralization_overtime.append((k,centralization_val))
 
-    with open('dPOS_results_2.csv','w') as out:
+    with open('lottery_results.csv','w') as out:
         csv_out=csv.writer(out)
         csv_out.writerow(['iteration','gini coefficient'])
         for row in centralization_overtime:
