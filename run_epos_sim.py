@@ -1,23 +1,26 @@
+import numpy as np
+import csv
+
 '''
 run simulator
 '''
-from Models import *
-from protocol import *
-import csv
+from ePOS_Model import *
+from ePOS import *
 
-def run_sim(iters=10001):
+def run_sim(iters=10000):
+    #make a storage list 
     net = network(10000)
-    protocol = lottery(net)
 
     centralization_overtime = []
+
     for k in range(iters):
-        protocol.validate_block(5)
-        if (k%100 == 0):
-            centralization_val = net.gini_coefficient()
-            print(k, "= ", centralization_val)
+        blocks = net.create_blocks()
+        ePOS(net, blocks)
+        if k % 100 == 0:
+            centralization_val = net.calc_centralization()
             centralization_overtime.append((k,centralization_val))
 
-    with open('lottery_results.csv','w') as out:
+    with open('ePOS_results.csv','w') as out:
         csv_out=csv.writer(out)
         csv_out.writerow(['iteration','gini coefficient'])
         for row in centralization_overtime:
