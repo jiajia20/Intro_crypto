@@ -195,29 +195,43 @@ class lottery(protocol_interface):
         winners = list(np.random.choice(participants, num_validators, p=probability_distribution, replace=False))
 
         # set reward distribution ratio
-        ratio = num_validators / self.network.num_nodes
+        w_ratio = min(5 * num_validators / len(participants), .90)
 
-        # distribute rewards, winners will get 10% greedier
-        winner_distribution = ratio * self.network.prize_pool
+        # distribute rewards, winners will get 10% greedier if they made money
+        # if they lose money, they get 10% less greedy
+        winner_distribution = w_ratio * self.network.prize_pool
         winner_split = winner_distribution / num_validators
         for w in winners:
             w.add_wealth(winner_split)
-            w.adjust_greed(1.1)
+            if (winner_split > w.stake * self.cost):
+                w.adjust_greed(1.1)
+            else:
+                w.adjust_greed(0.90)
 
-        # distribute consolation reward, losers get 5% less greedy to compensate for loss
+        remaining_reward = (1 - w_ratio) * self.network.prize_pool
+
         remainder = list(set(participants) - set(winners))
-        remainder_distribution = (0.90 - ratio) * self.network.prize_pool
+        non_participants = list(set(self.network.nodes) - set(participants))
+
+        p_ratio = min(len(participants) / len(non_participants), .9)
+
+        # distribute consolation reward, if the node makes money, increase their greed by 2%
+        # if they lose money, they get 5% less greedy to compensate for loss
+        remainder_distribution = p_ratio * remaining_reward
         remainder_split = remainder_distribution / len(remainder)
         for r in remainder:
             r.add_wealth(remainder_split)
-            r.adjust_greed(0.95)
+            if (remainder_split > r.stake * self.cost):
+                r.adjust_greed(1.02)
+            else:
+                r.adjust_greed(0.95)
 
-        # distribute a small amount to non-participants. Increase greed by 3% each round for "FOMO"
-        non_participants = list(set(self.network.nodes) - set(participants))
-        non_part_distribution = (0.10) * self.network.prize_pool
+        # distribute a small amount to non-participants
+        # increase greed by 1% each round for "FOMO"
+        non_part_distribution = (1 - p_ratio) * remaining_reward
         non_part_split = non_part_distribution / len(non_participants)
         for n in non_participants:
             n.add_wealth(non_part_split)
-            n.adjust_greed(1.03)
+            n.adjust_greed(1.01)
 
         self.network.new_round()

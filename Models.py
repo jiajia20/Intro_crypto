@@ -7,7 +7,7 @@ class node:
         self.id = id
         self.wealth = wealth
         self.stake = 0
-        self.blocks = rd.random()*1000
+        self.blocks = rd.random()*10
         self.stakers = {}
         # game theory variables
         self.greed = rd.random()
