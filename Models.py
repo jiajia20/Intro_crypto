@@ -7,7 +7,7 @@ class node:
         self.id = id
         self.wealth = wealth
         self.stake = 0
-        self.blocks = rd.random()*100
+        self.blocks = rd.random()*1000
         self.stakers = {}
         # game theory variables
         self.greed = rd.random()
@@ -33,14 +33,13 @@ class node:
 
     # determine how much wealth to use in order to participate based off self greed
     def participate(self, cost):
-        self.stake = 0
         adjustment = 1
         while self.wealth > cost:
             if rd.random() > (self.greed / adjustment):
                 break
             self.wealth -= cost
             self.stake += 1
-            adjustment += 1
+            adjustment += (1.0 - self.greed)
         return self.stake * cost
 
     # delegate stake to another node with amount based on self greed
@@ -74,8 +73,16 @@ class network:
     def __init__(self, num_nodes):
         self.nodes = []
         self.num_nodes = num_nodes
-        self.normal_distribution()
-        self.prize_pool = 0
+        self.real_distribution()
+        self.prize_pool = 20
+
+    def new_round(self, isGt = False):
+        self.prize_pool = 20
+        for n in self.nodes:
+            n.stakers = {}
+            n.stake = 0
+            if (isGt):
+                n.reflect()
 
     def number_of_nodes(self):
         return self.num_nodes
@@ -105,7 +112,6 @@ class network:
             self.nodes.append(node(i, wealth))
 
     def participants(self, cost):
-        self.prize_pool = 20
         participants = []
         for n in self.nodes:
             self.prize_pool += n.participate(cost)
@@ -113,4 +119,24 @@ class network:
                 participants.append(n)
         return participants
 
+    def create_blocks(self):
+        blocks = []
+        num_blocks = 5
+        for i in range(num_blocks):
+            blocks.append(block(self))
+        blocks.sort(key=lambda b: b.tf, reverse=True)
+        return blocks
 
+    def find_min_max_wealth(self):
+        self.nodes.sort(key=lambda n: n.wealth)
+        return self.nodes[0].wealth, self.nodes[-1].wealth
+
+    def find_rand_node(self):
+        node_loc = np.random.randint(0, self.number_of_nodes())
+        return self.nodes[node_loc]
+
+class block(object):
+
+    def __init__(self, network):
+        min_wealth, max_wealth = network.find_min_max_wealth()
+        self.tf = min_wealth/2 + np.random.random() * (max_wealth/2)
