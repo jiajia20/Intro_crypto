@@ -73,7 +73,7 @@ class network:
     def __init__(self, num_nodes):
         self.nodes = []
         self.num_nodes = num_nodes
-        self.real_distribution()
+        self.normal_distribution()
         self.prize_pool = 20
 
     def new_round(self, isGt = False):
@@ -98,17 +98,28 @@ class network:
     def real_distribution(self):
         for low in range(int(self.num_nodes*0.8)):
             wealth = np.random.normal(loc=10, scale=2)
-            self.nodes.append(node(low, wealth))
+            lnode = node(low, wealth)
+            lnode.blocks = 1
+            lnode.greed = rd.random()
+            self.nodes.append(lnode)
         for med in range(int(self.num_nodes*0.15)):
             wealth = np.random.normal(loc=100, scale=10)
-            self.nodes.append(node(int(self.num_nodes*0.8)+med, wealth))
+            mnode = node(int(self.num_nodes*0.8)+med, wealth)
+            mnode.blocks = rd.random()*10
+            mnode.greed = 0.3 + rd.random()*0.7
+            self.nodes.append(mnode)
         for high in range(int(self.num_nodes*0.05)):
             wealth = 1000
-            self.nodes.append(node(int(self.num_nodes*0.95)+high, wealth))
+            hnode = node(int(self.num_nodes*0.95)+high, wealth)
+            hnode.blocks = rd.random()*100
+            hnode.greed = 0.6 + rd.random()*0.4
+            self.nodes.append(hnode)
 
     def normal_distribution(self):
         for i in range(self.num_nodes):
             wealth = np.random.normal(loc=100, scale = 10)
+            nnode = node(i, wealth)
+            nnode.blocks = int(nnode.wealth/10)
             self.nodes.append(node(i, wealth))
 
     def participants(self, cost):
