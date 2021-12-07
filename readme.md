@@ -1,7 +1,15 @@
 Read Me
 
-We made a simple agent based model to test the decentralization and security of current variation of POS. 
-
+# Project Abstract
+Centralization is an issue that has begun to arise in major cryptocurrency solutions
+as the creation of mining pools, cost of mining hardware, and hoarding of currency
+has increased overtime. In this paper, we are going to determine whether Proof-
+of-Stake cryptocurrencies tend to become centralized over time or not. To do so,
+we used agent-based modeling to run simulations of various con gurations of Proof-
+of-Stake systems, such as Delegated Proof-of-Stake, Extended Proof-of-Stake, and
+Pure Proof-of-Stake to observe the collection of wealth over time. Finally, we tried
+to  nd an improvement to the proof-of-stake system with our own design, called
+Raffle Proof-of-Stake.
 
 ## About POS
 In Proof of Stake is a variation of consensus algorithms of distributed systems. 
