@@ -1,6 +1,6 @@
 Read Me
 
-# Project Abstract
+## Project Abstract
 Centralization is an issue that has begun to arise in major cryptocurrency solutions
 as the creation of mining pools, cost of mining hardware, and hoarding of currency
 has increased overtime. In this paper, we are going to determine whether Proof-
