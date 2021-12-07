@@ -1,0 +1,39 @@
+%%% File encoding is ISO-8859-1 (also known as Latin-1)
+%%% You can use special characters just like ä,ü and ñ
+
+% Title page using \maketitle (a more flexible alternative is the titlepage environment)
+\newcommand\BackgroundIm{
+	\put(-3,0){
+		\parbox[b][\paperheight]{\paperwidth}{%
+			\centering
+			\transparent{0.95}
+			\includegraphics[angle=90,height=\paperheight,width=\paperwidth]{03_GRAPHICS/cover.jpg}%
+}}}
+\AddToShipoutPicture*{\BackgroundIm}
+\begin{titlepage}
+	\color{white}
+	\centering
+	\vspace{4cm}
+	{\Huge\bfseries\scshape 17-303: Cryptocurrencies, Blockchains, and Applications \par}
+	\vspace{1cm}
+	{\scshape\huge An Investigation into Proof-of-Stake Centralization Trends \par}
+	\vspace{5cm}
+	{
+		Abhishek Agarwal  \par
+		\color{white}Alec Yu \par
+		\color{white}Jiajia Hu\par
+		\color{white}Samraj Kalkat \par
+		\color{white}Sevag Keosseian \par
+	}
+	
+	\vfill
+	
+	{
+	 Code: \url{https://github.com/jiajia20/Intro_crypto}
+	}
+	
+	\vfill
+	
+	% Bottom of the page
+	{\large \today\par}
+\end{titlepage}

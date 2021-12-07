@@ -1,0 +1,129 @@
+%%% File encoding is ISO-8859-1 (also known as Latin-1)
+%%% You can use special characters just like ä,ü and ñ
+%%% LaTeX template by Manuel Kuehner, 2015
+
+%%% If you use this template then please give credit like this:
+%%% ----------------------------
+% LaTeX code inspired by the LaTeX Thesis Template by Manuel Kuehner 
+% www.bedienhaptik.de/latex-template/
+%%% ----------------------------
+
+% ##############################################
+% Start: Template Preamble
+% ##############################################
+%
+
+% Documentclass definition
+\input{01_Preamble/documentclass.tex}
+
+% Loading additional packages from the KOMA-Script family
+\input{01_Preamble/KOMA-Script-Packages.tex}
+% Page layout definition
+\input{01_Preamble/PageLayout.tex}
+
+% Standard packages
+\input{01_Preamble/CommonPackages.tex}
+
+% ####-Important-####
+%
+% Definition of the two main colors
+% -----------------------
+% The corresponding xcolor package ist loaded in the file 
+% 01_Preamble/StandardPackages.tex
+%
+% ####-Important-####
+\definecolor[named]{myColorMainA}{RGB}{0,26,153}
+\definecolor[named]{myColorMainB}{RGB}{174,49,54}
+
+% Customization of 
+% - Floating Objects (Caption) 
+% - Table of Contents (TOC)
+% - List of Figures
+% - List of Tables
+% - Headings (like chapter, section, etc.)
+\input{01_Preamble/Floating-AND-TOC-AND-ListOf-AND-Headings.tex}
+
+% Customization of the header, footer and teh margin note
+\input{01_Preamble/HeaderFooterMarginnote.tex}
+
+% Optimize paragraphs (avoid overfull... warnings)
+\input{01_Preamble/ParagraphOptimization.tex}
+
+% PDF related packages
+\input{01_Preamble/PDF-Related.tex}
+
+% PDF related packages
+\input{01_Preamble/RandomTextPackage.tex}
+
+%
+% #######################
+% Ende: Template Preamble
+% #######################
+
+% ##############################################
+% Start: Document
+% ##############################################
+%
+% ------------------------------------------------------------------
+% Use the graphics package to display pictures
+\usepackage{graphicx}
+\usepackage{setspace}
+
+\begin{document}
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Title page
+\input{02_Chapters/TitlePage.tex}
+
+% Activate header and footer defined in the file:
+% 01_Preamble/HeaderFooterMarginnote.tex
+\pagestyle{scrheadings}
+
+% Activate roman numbering (e. g. xii)	
+\pagenumbering{roman}
+
+% Start with page 1 (I)
+\setcounter{page}{1}
+
+\onehalfspacing
+
+% Executive summary
+\input{02_Chapters/Abstract.tex}
+
+% Table of Contents
+\input{02_Chapters/TOC.tex}
+
+% Activate arabic numbering (e. g. 12)	
+\pagenumbering{arabic}
+
+% Start with page 1
+\setcounter{page}{1}
+
+% Introduction
+\input{02_Chapters/Introduction.tex}
+
+% Background
+\input{02_Chapters/Background.tex}
+
+% LMethods
+\input{02_Chapters/Methods.tex}
+
+% Results
+\input{02_Chapters/Results.tex}
+
+% Discussion
+\input{02_Chapters/Discussion.tex}
+
+% References
+\nocite{*}
+\bibliographystyle{ieeetr}
+\bibliography{02_Chapters/References}
+
+
+\end{document}
+% ------------------------------------------------------------------
+%
+% #######################
+% End: Document
+% #######################

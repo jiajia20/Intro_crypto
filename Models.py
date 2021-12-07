@@ -7,7 +7,7 @@ class node:
         self.id = id
         self.wealth = wealth
         self.stake = 0
-        self.blocks = rd.random()*10
+        self.blocks = 1
         self.stakers = {}
         # game theory variables
         self.greed = rd.random()
@@ -119,7 +119,6 @@ class network:
         for i in range(self.num_nodes):
             wealth = np.random.normal(loc=100, scale = 10)
             nnode = node(i, wealth)
-            nnode.blocks = int(nnode.wealth/10)
             self.nodes.append(node(i, wealth))
 
     def participants(self, cost):
