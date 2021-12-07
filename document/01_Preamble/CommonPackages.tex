@@ -1,0 +1,91 @@
+%%% File encoding is ISO-8859-1 (also known as Latin-1)
+%%% You can use special characters just like ä,ü and ñ
+
+% Input encoding is 'latin1' (Latin 1 - also known as ISO-8859-1)
+% CTAN: http://www.ctan.org/pkg/inputenc
+% 
+% A newer package is available - you may look into:
+% \usepackage[x-iso-8859-1]{inputenc}
+% CTAN: http://www.ctan.org/pkg/inputenx
+\usepackage[latin1]{inputenc}
+
+% Font Encoding is 'T1' -- important for special characters such as Umlaute ü or ä and special characters like ñ (enje)
+% CTAN: http://www.ctan.org/pkg/fontenc
+\usepackage[T1]{fontenc}
+
+% Language support for 'english' (alternative 'ngerman' or 'french' for example)
+% CTAN: http://www.ctan.org/pkg/babel
+\usepackage[english]{babel} 
+
+% Doing calculations with LaTeX units -- needed for the vertical line in the footer
+% CTAN: http://www.ctan.org/pkg/calc
+\usepackage{calc}
+
+% Extended graphics support 
+% There is also a package named 'graphics' - watch out!
+% CTAN: http://www.ctan.org/pkg/graphicx
+\usepackage{graphicx}
+
+% Extendes support for floating objects (tables, figures), adds the [H] placing option (\begin{figure}[H]) which palces it "Here" (without any doubt).
+% CTAN: http://www.ctan.org/pkg/float
+\usepackage{float}
+
+% Extended color support
+% I use the command \definecolor for example. 
+% Option 'Table': Load the colortbl package, in order to use the tools for coloring rows, columns, and cells within tables.
+% CTAN: http://www.ctan.org/pkg/xcolor
+\usepackage[table]{xcolor} 
+
+% Nice tables
+% CTAN: http://www.ctan.org/pkg/booktabs
+\usepackage{booktabs}
+
+% Better support for ragged left and right. Provides the commands \RaggedRight and \RaggedLeft. 
+% Standard LaTeX commands are \raggedright and \raggedleft
+% http://www.ctan.org/pkg/ragged2e
+\usepackage{ragged2e}
+
+% Create function plots directly in LaTeX
+% CTAN: http://www.ctan.org/pkg/pgfplots
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.11}
+
+% Math stuff.
+\usepackage{amsmath,amsfonts,amssymb}
+
+% Code stuff.
+\usepackage{listings}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mylightgray}{gray}{0.98}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{ %
+  backgroundcolor=\color{mylightgray},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=t,                    % sets the caption-position to top
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% Stuff for the title page.
+\usepackage{eso-pic}
+\usepackage{transparent}
